@@ -16,7 +16,6 @@ class DjangoRestLogger(object):
         :param exception:
         :return:
         """
-        print('entra')
         logger = logging.getLogger(settings.LOGGER_EXCEPTION)
         logger.exception(msg=sys.exc_info()[1])
 
