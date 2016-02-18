@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from rest_framework import status, exceptions
 from rest_framework.response import Response
 
-from .log import exception as log_exception
+from .logger import DjangoRestLogger
 
 
 def rest_exception_handler(exc, context):
@@ -45,7 +45,7 @@ def rest_exception_handler(exc, context):
         data = {'non_field_errors': [six.text_type(msg)]}
         return Response(data, status=status.HTTP_403_FORBIDDEN)
     else:
-        log_exception()
+        DjangoRestLogger.log_exception()
         msg = _('Server Error. Please try again later.')
         data = {'non_field_errors': [six.text_type(msg)]}
         return Response(data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
